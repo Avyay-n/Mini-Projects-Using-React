@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import genreids from '../utilities/genre'
 
 function WatchList({ watchlist, handleRemoveFromWatchlist, setWatchList }) {
   const [search, setSearch] = useState("");
@@ -110,9 +111,7 @@ function WatchList({ watchlist, handleRemoveFromWatchlist, setWatchList }) {
                     </td>
                     <td className="text-center">{movieObj.vote_average.toFixed(1)}</td>
                     <td className="text-center">{movieObj.popularity.toFixed(1)}</td>
-                    <td className="text-center">
-                      {movieObj.genre_ids ? movieObj.genre_ids[0] : "N/A"}
-                    </td>
+                    <td className="text-center">{genreids[movieObj.genre_ids[0]]}</td>
                     <td className="text-center">
                       <button
                         className="text-red-600 hover:text-red-800 cursor-pointer font-bold"
