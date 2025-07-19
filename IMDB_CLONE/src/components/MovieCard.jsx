@@ -31,14 +31,14 @@ function MovieCard({
       {doesContain(movieObj) ? (
         <div
           onClick={() => handleRemoveFromWatchlist(movieObj)}
-          className="mx-2 my-1 flex justify-center h-7 w-7 items-center rounded-lg bg-gray-900"
+          className="mx-2 my-1 flex justify-center h-8 w-8 items-center rounded-2xl bg-gray-900"
         >
           &#10060;
         </div>
       ) : (
         <div
           onClick={() => handleAddtoWatchlist(movieObj)}
-          className="mx-2 my-1 flex justify-center h-7 w-7 items-center rounded-lg bg-gray-900"
+          className="mx-2 my-1 flex justify-center h-8 w-8 items-center rounded-2xl bg-gray-900"
         >
           &#10084;
         </div>

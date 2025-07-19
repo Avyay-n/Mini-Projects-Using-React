@@ -43,7 +43,11 @@ function App() {
           path="/"
           element={
             <>
-              <Banner />
+              <Banner
+                watchlist={watchlist}
+                handleAddtoWatchlist={handleAddtoWatchlist}
+                handleRemoveFromWatchlist={handleRemoveFromWatchlist}
+              />
               <Movies
                 watchlist={watchlist}
                 handleAddtoWatchlist={handleAddtoWatchlist}

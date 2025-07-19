@@ -1,12 +1,19 @@
 import React from "react";
 import { useState } from "react";
-import genreids from '../utilities/genre'
+import { useEffect } from "react";
+import genreids from "../utilities/genre";
 
 function WatchList({ watchlist, handleRemoveFromWatchlist, setWatchList }) {
   const [search, setSearch] = useState("");
+  const [genreList, setGenreList] = useState(["All Genres"]);
+  const [currGenre, setCurrGenre] = useState("All Genres");
 
   let handleSearch = (e) => {
     setSearch(e.target.value);
+  };
+
+  let handleFilter = (genre) => {
+    setCurrGenre(genre);
   };
 
   let sortIncreasing = () => {
@@ -37,15 +44,31 @@ function WatchList({ watchlist, handleRemoveFromWatchlist, setWatchList }) {
     setWatchList([...sortedPopularityDecreasing]);
   };
 
+  useEffect(() => {
+    let temp = watchlist.map((movieObj) => {
+      return genreids[movieObj.genre_ids[0]];
+    });
+    temp = new Set(temp);
+    setGenreList(["All Genres", ...temp]);
+  }, [watchlist]);
+
   return (
     <>
       <div className="flex justify-center flex-wrap m-4">
-        <div className="flex justify-center items-center h-[3rem] w-[9rem] bg-blue-400 rounded-xl text-white font-bold mx-2 my-3 hover:scale-110 duration-300 hover:cursor-pointer">
-          Action
-        </div>
-        <div className="flex justify-center items-center h-[3rem] w-[9rem] bg-gray-300 rounded-xl text-white font-bold mx-2 my-3 hover:scale-110 duration-300 hover:cursor-pointer">
-          Horror
-        </div>
+        {genreList.map((genre) => {
+          return (
+            <div
+              onClick={() => handleFilter(genre)}
+              className={
+                currGenre === genre
+                  ? "flex justify-center items-center h-[3rem] w-[9rem] bg-blue-400 rounded-xl text-white font-bold mx-2 my-4 hover:scale-115 duration-300 hover:cursor-pointer"
+                  : "flex justify-center items-center h-[3rem] w-[9rem] bg-gray-400 rounded-xl text-white font-bold mx-2 my-4 hover:scale-115 duration-300 hover:cursor-pointer"
+              }
+            >
+              {genre}
+            </div>
+          );
+        })}
       </div>
 
       <div className="flex justify-center my-4">
@@ -65,22 +88,34 @@ function WatchList({ watchlist, handleRemoveFromWatchlist, setWatchList }) {
               <th className="text-left pl-4 py-3">Name</th>
               <th className="py-3">
                 <div className="flex justify-center items-center">
-                  <div onClick={sortDecreasing} className="p-1 cursor-pointer hover:text-blue-500">
+                  <div
+                    onClick={sortDecreasing}
+                    className="p-1 cursor-pointer hover:text-blue-500"
+                  >
                     <i className="fa-solid fa-arrow-up"></i>
                   </div>
                   <div className="p-1">Ratings</div>
-                  <div onClick={sortIncreasing} className="p-1 cursor-pointer hover:text-blue-500">
+                  <div
+                    onClick={sortIncreasing}
+                    className="p-1 cursor-pointer hover:text-blue-500"
+                  >
                     <i className="fa-solid fa-arrow-down"></i>
                   </div>
                 </div>
               </th>
               <th className="py-3">
                 <div className="flex justify-center items-center">
-                  <div onClick={sortPopularityDecreasing} className="p-1 cursor-pointer hover:text-blue-500">
+                  <div
+                    onClick={sortPopularityDecreasing}
+                    className="p-1 cursor-pointer hover:text-blue-500"
+                  >
                     <i className="fa-solid fa-arrow-up"></i>
                   </div>
                   <div className="p-1">Popularity</div>
-                  <div onClick={sortPopularityIncreasing} className="p-1 cursor-pointer hover:text-blue-500">
+                  <div
+                    onClick={sortPopularityIncreasing}
+                    className="p-1 cursor-pointer hover:text-blue-500"
+                  >
                     <i className="fa-solid fa-arrow-down"></i>
                   </div>
                 </div>
@@ -92,13 +127,23 @@ function WatchList({ watchlist, handleRemoveFromWatchlist, setWatchList }) {
           <tbody>
             {watchlist
               .filter((movieObj) => {
+                if (currGenre === "All Genres") {
+                  return true;
+                } else {
+                  return genreids[movieObj.genre_ids[0]] === currGenre;
+                }
+              })
+              .filter((movieObj) => {
                 return movieObj.title
                   .toLowerCase()
                   .includes(search.toLocaleLowerCase());
               })
               .map((movieObj) => {
                 return (
-                  <tr className="border-b border-gray-300 font-bold hover:bg-gray-200" key={movieObj.id}>
+                  <tr
+                    className="border-b border-gray-300 font-bold hover:bg-gray-200"
+                    key={movieObj.id}
+                  >
                     <td className="flex items-center p-4 text-left">
                       <img
                         className="h-[6rem] w-[10rem] object-cover rounded"
@@ -109,9 +154,15 @@ function WatchList({ watchlist, handleRemoveFromWatchlist, setWatchList }) {
                         {movieObj.title || movieObj.name}
                       </div>
                     </td>
-                    <td className="text-center">{movieObj.vote_average.toFixed(1)}</td>
-                    <td className="text-center">{movieObj.popularity.toFixed(1)}</td>
-                    <td className="text-center">{genreids[movieObj.genre_ids[0]]}</td>
+                    <td className="text-center">
+                      {movieObj.vote_average.toFixed(1)}
+                    </td>
+                    <td className="text-center">
+                      {movieObj.popularity.toFixed(1)}
+                    </td>
+                    <td className="text-center">
+                      {genreids[movieObj.genre_ids[0]]}
+                    </td>
                     <td className="text-center">
                       <button
                         className="text-red-600 hover:text-red-800 cursor-pointer font-bold"
