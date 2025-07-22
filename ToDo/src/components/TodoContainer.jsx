@@ -3,9 +3,9 @@ import Todo from "./Todo";
 
 function TodoContainer({ todos, delTodo }) {
   return (
-    <div className="container">
+    <div  className="container">
       {todos.map((todo, index) => {
-        return <Todo todo={todo} index={index} delTodo={delTodo}/>;
+        return <Todo todo={todo} key={index} index={index} delTodo={delTodo}/>;
       })}
     </div>
   );
