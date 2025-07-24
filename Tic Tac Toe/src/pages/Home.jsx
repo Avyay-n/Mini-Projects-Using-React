@@ -1,5 +1,3 @@
-// src/pages/Home.jsx
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -10,7 +8,10 @@ function Home({ setPlayerNames }) {
 
   const handlePlayClick = () => {
     if (p1 && p2) {
-      setPlayerNames({ p1, p2 });
+      const newPlayerNames = { p1, p2 };
+      setPlayerNames(newPlayerNames);
+      // Save the names to localStorage as a JSON string
+      localStorage.setItem('playerNames', JSON.stringify(newPlayerNames));
       navigate('/play');
     } else {
       alert('Please enter names for both players.');
