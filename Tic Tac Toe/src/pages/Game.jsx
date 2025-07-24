@@ -43,11 +43,11 @@ function Game({ playerNames }) {
         <span>{playerNames.p2} (O)</span>
       </div>
       <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
-      <div className="mt-6 text-2xl font-semibold">{status}</div>
+      <div className="mt-8 text-2xl font-semibold">{status}</div>
       {(winner || currentMove === 9) && (
         <button
           onClick={resetGame}
-          className="mt-4 py-2 px-6 bg-pink-600 hover:bg-pink-700 rounded-md text-lg font-semibold transition duration-200"
+          className="m-8 p-2 px-6 bg-pink-600 hover:bg-pink-700 hover:cursor-pointer rounded-md text-lg font-semibold transition duration-200"
         >
           Play Again
         </button>

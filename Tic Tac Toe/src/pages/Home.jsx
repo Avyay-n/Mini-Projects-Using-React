@@ -1,3 +1,5 @@
+// src/pages/Home.jsx
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -16,19 +18,19 @@ function Home({ setPlayerNames }) {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center bg-gray-800 p-8 rounded-lg shadow-xl">
-      <h2 className="text-3xl font-bold mb-6 text-gray-200">Enter Player Names</h2>
+    <div className="w-full bg-gray-800 p-8 rounded-lg shadow-xl">
+      <h2 className="text-3xl text-center font-bold mb-6 text-gray-200">Enter Player Names</h2>
       <div className="w-full space-y-4">
         <input
           type="text"
-          placeholder="Enter Player 1 Name"
+          placeholder="Player 1 Name"
           value={p1}
           onChange={(e) => setP1(e.target.value)}
           className="w-full p-3 bg-gray-700 rounded-md border border-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-500"
         />
         <input
           type="text"
-          placeholder="Enter Player 2 Name"
+          placeholder="Player 2 Name"
           value={p2}
           onChange={(e) => setP2(e.target.value)}
           className="w-full p-3 bg-gray-700 rounded-md border border-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-500"
