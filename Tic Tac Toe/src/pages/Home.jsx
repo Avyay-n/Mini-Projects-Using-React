@@ -10,8 +10,11 @@ function Home({ setPlayerNames }) {
     if (p1 && p2) {
       const newPlayerNames = { p1, p2 };
       setPlayerNames(newPlayerNames);
-      // Save the names to localStorage as a JSON string
       localStorage.setItem('playerNames', JSON.stringify(newPlayerNames));
+
+      localStorage.removeItem('tic-tac-toe-history');
+      localStorage.removeItem('tic-tac-toe-move');
+
       navigate('/play');
     } else {
       alert('Please enter names for both players.');
