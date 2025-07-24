@@ -23,7 +23,7 @@ function Home({ setPlayerNames }) {
 
   return (
     <div className="w-full bg-gray-800 p-8 rounded-lg shadow-xl">
-      <h2 className="text-3xl text-center font-bold mb-6 text-gray-200">Enter Player Names</h2>
+      <h2 className="text-4xl text-center font-bold mb-8 text-gray-200">Enter Player Names</h2>
       <div className="w-full space-y-4">
         <input
           type="text"
@@ -42,7 +42,7 @@ function Home({ setPlayerNames }) {
       </div>
       <button
         onClick={handlePlayClick}
-        className="mt-6 w-full py-3 bg-purple-600 hover:bg-purple-700 rounded-md text-lg font-semibold transition duration-200"
+        className="mt-6 w-full py-3 bg-purple-600 hover:bg-purple-700 hover:cursor-pointer rounded-md text-lg font-semibold transition duration-200"
       >
         Play
       </button>
